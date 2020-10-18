@@ -14,3 +14,5 @@ export const writePost = ({
     originalTitle,
     originalSinger,
   });
+
+export const readPost = (id) => client.get(`/api/posts/${id}`);
