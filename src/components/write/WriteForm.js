@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 
-const WriteAuthFormBlock = styled.div`
+const WriteFormBlock = styled.div`
   h3 {
     margin: 0;
     color: ${palette.gray[8]};
@@ -26,41 +26,58 @@ const StyledInput = styled.input`
   }
 `;
 
-const textMap = {
-  write: '게시물작성',
-};
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
 
-const WriteAuthForm = ({ type }) => {
-  const text = textMap[type];
+const WriteForm = ({ form, onSubmit, onChange, error }) => {
   return (
-    <WriteAuthFormBlock>
-      <h3>{text}</h3>
-      <form>
-        <StyledInput autoComplete="title" name="title" placeholder="제목" />
+    <WriteFormBlock>
+      <h3>게시물 작성</h3>
+      <form onSubmit={onSubmit}>
+        <StyledInput
+          autoComplete="title"
+          name="title"
+          placeholder="제목"
+          value={form.title}
+          onChange={onChange}
+        />
         <StyledInput
           autoComplete="youtubeLink"
           name="youtubeLink"
           placeholder="유튜브 영상 링크"
           type="string"
+          value={form.youtubeLink}
+          onChange={onChange}
         />
         <StyledInput
           autoComplete="description"
           name="description"
           placeholder="간단한 영상 설명"
+          value={form.description}
+          onChange={onChange}
         />
         <StyledInput
           autoComplete="originalTitle"
           name="originalTitle"
           placeholder="원곡 제목"
+          value={form.originalTitle}
+          onChange={onChange}
         />
         <StyledInput
           autoComplete="originalSinger"
           name="originalSinger"
           placeholder="원곡 가수"
+          value={form.originalSinger}
+          onChange={onChange}
         />
+        {error && <ErrorMessage>{error}</ErrorMessage>}
       </form>
-    </WriteAuthFormBlock>
+    </WriteFormBlock>
   );
 };
 
-export default WriteAuthForm;
+export default WriteForm;
