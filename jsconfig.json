@@ -1,8 +1,7 @@
-// TODO: jsconfig
 {
-    "compilerOptions": {
-      "target": "es6",
-      "module": "commonjs"
-    },
-    "include": ["src/**/*"]
-  }
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs"
+  },
+  "include": ["src/**/*"]
+}
