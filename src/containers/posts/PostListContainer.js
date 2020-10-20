@@ -12,7 +12,7 @@ const PostListContainer = () => {
       posts: posts.posts,
       error: posts.error,
       loading: loading['posts/LIST_POSTS'],
-      uesr: user.user,
+      user: user.user,
     }),
   );
 
