@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
+import qs from 'qs';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
@@ -17,15 +18,15 @@ const PostHead = styled.div`
   }
 `;
 const SubInfo = styled.div`
-    margin-top: 1rem;
-    color: ${palette.gray[6]};
+  margin-top: 1rem;
+  color: ${palette.gray[6]};
 
-    span + span:before {
-        color: ${palette.gray[6]}
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        content: '\\B7';
-    }
+  span + span:before {
+    color: ${palette.gray[6]};
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    content: '\\B7';
+  }
 `;
 
 const PostContent = styled.div`
@@ -45,21 +46,39 @@ const PostViewer = ({ post, error, loading }) => {
     return null;
   }
   // TODO: get link, des, ori_singer, ori_title
-  const { title, user, publishedDate } = post;
+  const {
+    author: { username },
+    createdAt,
+    description,
+    originalSinger,
+    originalTitle,
+    title,
+    youtubeLink,
+  } = post;
+
+  const { v: v_id } = qs.parse(youtubeLink.split('?')[1]);
+
   return (
     <PostViewerBlock>
       <PostHead>
-        <h1>{title}</h1>
+        <h1>{`${title} (${originalTitle} - ${originalSinger})`}</h1>
         <SubInfo>
           <span>
-            <b>{user.username}</b>
+            <b>{username}</b>
           </span>
-          <span>{new Date(publishedDate).toLocaleDateString()}</span>
+          <span>{new Date(createdAt).toLocaleDateString()}</span>
         </SubInfo>
       </PostHead>
-      <PostContent /* TODO:body of post */
-        dangerouslySetInnerHTML={{ __html: '<p>HTML <b>내용</b>입니다.</p>' }}
-      />
+      <iframe
+        title={title}
+        width="560"
+        height="315"
+        src={`https://www.youtube.com/embed/${v_id}`}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+      <PostContent>{description}</PostContent>
     </PostViewerBlock>
   );
 };
