@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
-import qs from 'qs';
+import youtubeIdParse from '../../lib/youtubeIdParse';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
@@ -57,7 +57,7 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
     category,
   } = post;
 
-  const { v: v_id } = qs.parse(youtubeLink.split('?')[1]);
+  const v_id = youtubeIdParse(youtubeLink);
 
   return (
     <PostViewerBlock>

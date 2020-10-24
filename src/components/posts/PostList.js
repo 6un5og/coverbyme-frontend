@@ -5,9 +5,14 @@ import Button from '../common/Button';
 import palette from '../../lib/styles/palette';
 import SubInfo from '../common/SubInfo';
 import { Link } from 'react-router-dom';
+import youtubeIdParse from '../../lib/youtubeIdParse';
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0;
 `;
 
 const WritePostButtonWrapper = styled.div`
@@ -17,8 +22,12 @@ const WritePostButtonWrapper = styled.div`
 `;
 
 const PostItemBlock = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  width: calc(33% - 2rem);
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.04) 0px 4px 16px 0px;
+  margin: 1rem;
+
   &:first-child {
     padding-top: 0;
   }
@@ -26,8 +35,15 @@ const PostItemBlock = styled.div`
     border-top: 1px solid ${palette.gray[2]};
   }
 
+  h4 {
+    margin: 0.5rem 0;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
   h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 0;
     margin-top: 0;
     &:hover {
@@ -49,16 +65,16 @@ const PostItem = ({ post }) => {
     originalTitle,
     title,
     category,
-    // TODO: 나중에 grid 형식으로 바꿀 때 필요함.
-    // youtubeLink,
+    youtubeLink,
   } = post;
+  const v_id = youtubeIdParse(youtubeLink);
 
   return (
     <PostItemBlock>
+      <h4>{`CoveredBy[${category}]`}</h4>
+      <img src={`https://img.youtube.com/vi/${v_id}/0.jpg`} alt={youtubeLink} />
       <h2>
         <Link to={`/@${username}/${_id}`}>
-          {`CoveredBy[${category}]`}
-          <br />
           {`${title} (${originalTitle} - ${originalSinger})`}
         </Link>
       </h2>
@@ -85,11 +101,11 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
       </WritePostButtonWrapper>
       {/* 로딩 중이 아니고, 포스트 배열이 존재할 때만 보여 줌 */}
       {!loading && posts && (
-        <div>
+        <>
           {posts.map((post) => (
             <PostItem post={post} key={post._id} />
           ))}
-        </div>
+        </>
       )}
     </PostListBlock>
   );
