@@ -48,6 +48,7 @@ const PostItem = ({ post }) => {
     originalSinger,
     originalTitle,
     title,
+    category,
     // TODO: 나중에 grid 형식으로 바꿀 때 필요함.
     // youtubeLink,
   } = post;
@@ -56,6 +57,8 @@ const PostItem = ({ post }) => {
     <PostItemBlock>
       <h2>
         <Link to={`/@${username}/${_id}`}>
+          {`CoveredBy[${category}]`}
+          <br />
           {`${title} (${originalTitle} - ${originalSinger})`}
         </Link>
       </h2>

@@ -26,6 +26,20 @@ const StyledInput = styled.input`
   }
 `;
 
+const StyledSelect = styled.select`
+  font-size: 1rem;
+  border: none;
+  border-bottom: 1px solid ${palette.gray[5]};
+  padding-bottom: 0.5rem;
+  outline: none;
+  width: 100%;
+  margin-top: 1rem;
+  &:focus {
+    color: $oc-teal-7;
+    border-bottom: 1px solid ${palette.gray[7]};
+  }
+`;
+
 const ErrorMessage = styled.div`
   color: red;
   text-align: center;
@@ -74,6 +88,17 @@ const WriteForm = ({ form, onSubmit, onChange, error }) => {
           value={form.originalSinger}
           onChange={onChange}
         />
+        <StyledSelect name="category" value={form.category} onChange={onChange}>
+          <option value="" disabled hidden>
+            -- 카테고리 (선택 필수) --
+          </option>
+          <option value="vocal">보컬</option>
+          <option value="guitar">기타</option>
+          <option value="bass">베이스</option>
+          <option value="drum">드럼</option>
+          <option value="piano">피아노</option>
+          <option value="band">밴드</option>
+        </StyledSelect>
         {error && <ErrorMessage>{error}</ErrorMessage>}
       </form>
     </WriteFormBlock>

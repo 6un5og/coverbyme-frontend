@@ -32,6 +32,7 @@ const PostWirteForm = () => {
       description,
       originalTitle,
       originalSinger,
+      category,
     } = write;
     if ([title, youtubeLink, originalTitle, originalSinger].includes('')) {
       setError('빈 칸을 모두 입력하세요');
@@ -44,12 +45,15 @@ const PostWirteForm = () => {
         description,
         originalTitle,
         originalSinger,
+        category,
       }),
     );
   };
 
   useEffect(() => {
-    dispatch(initialize());
+    return () => {
+      dispatch(initialize());
+    };
   }, [dispatch]);
 
   useEffect(() => {

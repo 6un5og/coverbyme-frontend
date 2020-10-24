@@ -45,7 +45,7 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
   if (loading || !post) {
     return null;
   }
-  // TODO: get link, des, ori_singer, ori_title
+
   const {
     author: { username },
     createdAt,
@@ -54,6 +54,7 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
     originalTitle,
     title,
     youtubeLink,
+    category,
   } = post;
 
   const { v: v_id } = qs.parse(youtubeLink.split('?')[1]);
@@ -61,7 +62,11 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
   return (
     <PostViewerBlock>
       <PostHead>
-        <h1>{`${title} (${originalTitle} - ${originalSinger})`}</h1>
+        <h1>
+          {`CoveredBy[${category}]`}
+          <br />
+          {`${title} (${originalTitle} - ${originalSinger})`}
+        </h1>
         <SubInfo>
           <span>
             <b>{username}</b>
