@@ -5,7 +5,8 @@ import Responsive from '../common/Responsive';
 import youtubeIdParse from '../../lib/youtubeIdParse';
 
 const PostViewerBlock = styled(Responsive)`
-  margin-top: 4rem;
+  margin-top: 2rem;
+  padding-bottom: 3rem;
 `;
 const PostHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
@@ -62,11 +63,8 @@ const PostViewer = ({ post, error, loading, actionButtons }) => {
   return (
     <PostViewerBlock>
       <PostHead>
-        <h1>
-          {`CoveredBy[${category}]`}
-          <br />
-          {`${title} (${originalTitle} - ${originalSinger})`}
-        </h1>
+        <h1>{`${title} (${originalTitle} - ${originalSinger})`}</h1>
+        <h2>{`CoveredBy[${category}]`}</h2>
         <SubInfo>
           <span>
             <b>{username}</b>

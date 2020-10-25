@@ -16,6 +16,7 @@ const PostListBlock = styled(Responsive)`
 `;
 
 const WritePostButtonWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: flex-end;
   margin-bottom: 3rem;
@@ -72,12 +73,13 @@ const PostItem = ({ post }) => {
   return (
     <PostItemBlock>
       <h4>{`CoveredBy[${category}]`}</h4>
-      <img src={`https://img.youtube.com/vi/${v_id}/0.jpg`} alt={youtubeLink} />
-      <h2>
-        <Link to={`/@${username}/${_id}`}>
-          {`${title} (${originalTitle} - ${originalSinger})`}
-        </Link>
-      </h2>
+      <Link to={`/@${username}/${_id}`}>
+        <img
+          src={`https://img.youtube.com/vi/${v_id}/0.jpg`}
+          alt={youtubeLink}
+        />
+        <h2>{`${title} (${originalTitle} - ${originalSinger})`}</h2>
+      </Link>
       <SubInfo username={username} publishedDate={createdAt} />
       <p>{description}</p>
     </PostItemBlock>
