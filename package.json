@@ -41,5 +41,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://1.238.64.216:3000"
+  "proxy": "https://coverbyme-backend.herokuapp.com/"
 }
